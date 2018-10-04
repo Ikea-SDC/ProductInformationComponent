@@ -59,7 +59,7 @@ class Frame extends React.Component {
     }
 
     generateRandomProductId() {
-        return Math.floor(Math.random() * (100 - 1) + 1);
+        return Math.floor((Math.random() * 5000000) + 1);
     }
 
     componentDidMount() {
