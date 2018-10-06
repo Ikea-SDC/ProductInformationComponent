@@ -15,7 +15,7 @@ app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.resolve(__dirname, '../static/')))
 
-app.use('/', router);
+app.use('/productInfo/', router);
 
 app.listen(PORT, function () {
     console.log('ProductInformationComponent server listening on localhost:' + PORT);

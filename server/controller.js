@@ -1,66 +1,84 @@
 const db = require('../database/index');
 const Models = require('../database/models');
-const MockData = require('../database/mock/MOCK_DATA');
-const ReviewData = require('../database/mock/REVIEW_DATA');
 
-// exports.addProduct = function(req, res) {
-    
-// }
-
-// exports.addReview = function(req, res) {
-
-// }
-
-// exports.removeProduct = function(req, res) {
-
-// }
-
-// exports.removeReview = function(req, res) {
-
-// }
-
-exports.getReviews = function(id, callback) {
-    Models.reviews.find({productId: id}, (err, docs) => {
-        if(err) {
-            callback(err, null);
-        } else {
-            callback(null, docs);
-        }
-    });
-}
-
-exports.getProduct = function(id, callback) {
-    Models.product.find({productId: id}, (err, doc) => {
+exports.addProduct = function(req, res) {
+    Models.product.create(req.body, (err,docs) => {
         if(err) {
             console.log(err);
-            callback(err, null);
         } else {
-            callback(null, doc);
+            res.status(200).send(docs);
+        }
+    })
+}
+
+exports.addReview = function(req, res) {
+    Models.reviews.create(req.body, (err,docs) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.status(200).send(docs);
+        }
+    })
+}
+
+exports.updateProduct = function(req, res) {
+    console.log('this is id: ',req.params.id)
+    console.log('this is body: ', req.body)
+    Models.product.findOneAndUpdate({productId: req.params.id}, req.body, {new: true}, (err, docs) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.status(200).send(docs);
+        }
+    })
+}
+
+exports.updateReview = function(req, res) {
+    Models.reviews.findOneAndUpdate({productId: req.params.id}, req.body, {new: true}, (err, docs) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.status(200).send(docs);
+        }
+    })
+}
+
+exports.removeProduct = function(req, res) {
+    Models.product.deleteOne({productId: req.params.id}, (err,docs) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.status(200).send(docs);
+        }
+    })
+}
+
+exports.removeReview = function(req, res) {
+    Models.reviews.deleteOne({productId: req.params.id}, (err,docs) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.status(200).send(docs);
+        }
+    })
+}
+
+exports.getReviews = function(req, res) {
+    Models.reviews.find({productId: req.params.id}, (err, docs) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.status(200).send(docs);
         }
     });
 }
 
-exports.populate = function(callback) {
-    MockData.forEach((product) => {
-        let newProd = new Models.product(product);
-        newProd.save((err, res) => {
-            if(err) {
-                console.log(err);
-            } else {
-                console.log('Added product successfully!')
-            }
-        });
-    })
-
-    ReviewData.forEach((review) => {
-        let newReview = new Models.reviews(review);
-        newReview.save((err, res) => {
-            if(err) {
-                console.log(err);
-            } else {
-                console.log('Added review successfully!');
-            }
-        });
+exports.getProduct = function(req, res) {
+    Models.product.find({productId: req.params.id}, (err, docs) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.status(200).send(docs);
+        }
     });
-    callback();
 }
