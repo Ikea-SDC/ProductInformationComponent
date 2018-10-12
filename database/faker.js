@@ -1,10 +1,10 @@
 var faker = require('faker');
 var fs = require('fs');
-var writeStream = fs.createWriteStream('./revData.tsv');
+var writeStream = fs.createWriteStream('./sampleRevData.tsv');
 writeStream.once('open', (fd) => {
-  for (var j = 0; j < 5000000; j++) {
+  for (var j = 0; j < 5; j++) {
     // var prodObj = {
-    //   productId: j + 1,
+    //   productId: j + 6000000,
     //   product_info: {
     //     product_dimensions: {
     //       max: faker.random.number(50),
@@ -50,7 +50,7 @@ writeStream.once('open', (fd) => {
     // }
   
     var revObj = {
-      productId: j + 1,
+      productId: j + 6000000,
       rating: faker.random.number(5),
       review_body: faker.random.words(10),
       review_title: faker.random.words(1),

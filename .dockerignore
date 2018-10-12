@@ -1,1 +1,9 @@
 node_modules
+MongoProdData.tsv
+MongoRevData.tsv
+faker.js
+models.js
+populate.js
+client
+mock
+get.yml

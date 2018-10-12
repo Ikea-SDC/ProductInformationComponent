@@ -1,4 +1,5 @@
 node_modules
 bundle.js
+newRelicKey.js
 /database/MongoProdData.tsv
 /database/MongoRevData.tsv
